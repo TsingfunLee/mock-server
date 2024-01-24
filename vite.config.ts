@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [vue(), MockServer({
     api:{
       'page/index': {
-        contentType: 'application/json',
+        'Content-Type': 'application/json',
         statusCode: 200,
         res: {
           name: 'xiaoming',

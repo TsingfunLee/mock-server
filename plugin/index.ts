@@ -1,4 +1,18 @@
-export default (options) => {
+export interface Response{
+  [headers: string]: string | number | object,
+  res: object,
+  statusCode?: number
+}
+
+export interface Api {
+  [url: string]:Response
+}
+
+export interface Options {
+  api: Api
+}
+
+export default (options: Options) => {
   const {api} = options
   return {
     name: 'mock-server',

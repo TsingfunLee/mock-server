@@ -21,8 +21,15 @@ export default (options: Options) => {
         for(const key in api){
           if(req.url.includes(key)){
             const {res : response, statusCode, ...headers} = api[key]
-            res.writeHead(statusCode, headers)
-            res.end(JSON.stringify(response))      
+            if(typeof response === 'object'){
+              headers['Content-Type'] = 'application/json'
+              res.writeHead(statusCode??200, headers)
+              res.end(JSON.stringify(response))      
+            }else{
+              headers['Content-Type'] = 'text/plain'
+              res.writeHead(statusCode ?? 200, headers)
+              res.end(response)
+            }        
           }else{
             next()
           }
